@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'telegram/bot'
-require 'yaml'
 
 class QuoteHandler
 
