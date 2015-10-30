@@ -7,7 +7,7 @@ class QuoteHandler
   def self.get_random_quote
     total_quotes = Quote.count
     if total_quotes >= 1
-      chosen = Quote.find(rand(1..total_quotes))
+      chosen = Quote.offset(rand(total_quotes)).first
       "#{chosen.author}: \n #{chosen.phrase}"
     else
       "Sorry, there are no quotes yet!"
