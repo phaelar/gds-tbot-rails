@@ -34,7 +34,7 @@ class QuoteHandler
       author = author_raw[1..-2]
       phrase = message.text[1..-1]
       self.add_to_quotes(author, phrase)
-      bot.api.send_message(chat_id: message.chat.id, text: "Quote added! \n#{author}: #{message}")
+      bot.api.send_message(chat_id: message.chat.id, text: "Quote added! \n#{author}: #{message.text}")
     end
   end
 end
