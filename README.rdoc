@@ -1,28 +1,37 @@
-== README
+# GDS-telegram-bot-lite
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple Telegram bot for IDA GDS!
+Still work in progress!
 
-Things you may want to cover:
+Using the  [telegram-bot-ruby](https://github.com/atipugin/telegram-bot-ruby) wrapper for Telegram API.
 
-* Ruby version
+## Installation
+Execute:
 
-* System dependencies
+```shell
+$ bundle
+```
 
-* Configuration
+## Running the bot
 
-* Database creation
+First things first, you need to [obtain a token](https://core.telegram.org/bots#botfather) for your bot. Then add your API token as an environment variable 'API_TOKEN'
 
-* Database initialization
+Execute:
+```shell
+$ rake db:create db:migrate
+$ rails s
+```
 
-* How to run the test suite
+## Contributing
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Fork it
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create new Pull Request
 
-* Deployment instructions
+## Usage
 
-* ...
+`/qotd`: Return a random quote
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+`/qotd_add <author name> the actual quote`: Add your own quote to the list! (example: `/qotd_add <Shia Labeouf> Don't let your dreams be dreams`)
