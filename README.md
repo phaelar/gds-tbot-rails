@@ -1,9 +1,10 @@
-# GDS-telegram-bot-lite
+# GDS telegram bot rails
 
 Simple Telegram bot for IDA GDS!
 Still work in progress!
 
 Using the  [telegram-bot-ruby](https://github.com/atipugin/telegram-bot-ruby) wrapper for Telegram API.
+
 
 ## Installation
 Execute:
