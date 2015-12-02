@@ -25,15 +25,24 @@ class QuoteHandler
     when "/qotd"
       bot.api.send_message(chat_id: message.chat.id, text: self.get_random_quote)
     when "/qotd_add"
-      message.text.slice! "/qotd_add"
-      author_raw = /<.+>/.match(message.text).to_s
-      message.text.slice! author_raw.to_s
-      message.text.slice " "
+      if message.chat.type != "private"
+        bot.api.send_message(chat_id: message.chat.id, text: "Please private message me to add a new quote!")
+      else
+        message.text.slice! "/qotd_add"
+        begin
+          author_raw = /<.+>/.match(message.text).to_s
+          message.text.slice! author_raw.to_s
+          message.text.slice " "
 
-      author = author_raw[1..-2]
-      phrase = message.text[1..-1]
-      self.add_to_quotes(author, phrase)
-      bot.api.send_message(chat_id: message.chat.id, text: "Quote added! \n#{author}: #{message.text}")
+          author = author_raw[1..-2]
+          phrase = message.text[1..-1]
+          raise Exception if (author.length == 0 || phrase.length == 0)
+          self.add_to_quotes(author, phrase)
+          bot.api.send_message(chat_id: message.chat.id, text: "Quote added! \n#{author}: #{message.text}")
+        rescue Exception => e
+          bot.api.send_message(chat_id: message.chat.id, text: "Sorry a formatting error occured! Please use this format: '/qotd_add <author> message'")
+        end
+      end
     end
   end
 end

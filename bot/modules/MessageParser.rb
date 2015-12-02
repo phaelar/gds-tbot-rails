@@ -16,7 +16,7 @@ class MessageParser
     when /^\/qotd/
       QuoteHandler.handle_quotes(bot,message)
     when /^\/hashtag_count/
-      # HashtagHandler.count_hashtags(bot,message)
+      HashtagHandler.count_hashtags(bot,message)
     when /^\/wishlist/
       bot.api.send_message(chat_id: message.chat.id, text: "Link to feature wishlist: https://goo.gl/NZCgwB")
     else
@@ -25,15 +25,13 @@ class MessageParser
   end
 
   def self.parse_plaintext(bot, message)
-    p message.text
-    hashtag_string = ''
-    if /^#\w+|/.match(message.text) #message starts with hashtag
-      hashtag_string = /^#\w+|/.match(message.text).to_s
-    elsif /\s#\w+/.match(message.text) #message contains a hashtag
-      hashtag_string = /\s#\w+/.match(message.text).to_s
+    if !message.text.match(/^#\w+|/).to_s.empty? #message starts with hashtag
+      hashtag_string = message.text.match(/^#\w+|/).to_s
+    elsif !message.text.match(/#(\w+)/).to_s.empty? #message contains a hashtag
+      hashtag_string = message.text.match(/#(\w+)/).to_s
     end
 
-    if !hashtag_string.empty?
+    if !hashtag_string.nil? || !hashtag_string.empty?
       HashtagHandler.handle_hashtags(bot,message,hashtag_string)
     end
 
